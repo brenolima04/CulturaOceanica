@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cultura Oceânica e Tecnologia - São Luís MA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+
+    :root {
+      --transition-speed: 0.35s;
+
+      /* Light theme colors */
+      --color-bg: #ffffff;
+      --color-primary: #0c4a6e;
+      --color-primary-hover: #155e75;
+      --color-secondary: #0284c7;
+      --color-text: #6b7280;
+      --color-text-dark: #1f2937;
+      --color-muted: #9ca3af;
+      --color-card-bg: #f9fafb;
+      --color-btn-bg: #0c4a6e;
+      --color-btn-bg-hover: #155e75;
+      --color-btn-text: #ffffff;
+      --border-radius: 0.75rem;
+      --shadow-card: rgba(0, 0, 0, 0.1);
+      --shadow-btn: rgba(12, 74, 110, 0.4);
+      --shadow-hover: rgba(21, 94, 117, 0.5);
+
+      /* Icon color for sun in light and dark themes */
+      --icon-sun-color-light: #0c4a6e;
+      --icon-sun-color-dark: #ffffff;
+    }
+
+    /* Dark theme overrides */
+    body.dark {
+      --color-bg: #121212;
+      --color-primary: #0ea5e9;
+      --color-primary-hover: #0284c7;
+      --color-secondary: #38bdf8;
+      --color-text: #d1d5db;
+      --color-text-dark: #e5e7eb;
+      --color-muted: #6b7280;
+      --color-card-bg: #1e1e1e;
+      --color-btn-bg: #0ea5e9;
+      --color-btn-bg-hover: #0284c7;
+      --color-btn-text: #ffffff;
+      --shadow-card: rgba(255, 255, 255, 0.1);
+      --shadow-btn: rgba(14, 165, 233, 0.5);
+      --shadow-hover: rgba(2, 132, 199, 0.6);
+
+      --icon-sun-color-light: var(--icon-sun-color-dark);
+    }
+
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+    a:hover, a:focus {
+      color: var(--color-primary-hover);
+      outline-offset: 2px;
+      outline-color: var(--color-primary);
+      outline-style: solid;
+      outline-width: 2px;
+    }
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg);
+      box-shadow: 0 2px 8px var(--shadow-card);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin: 0;
+      user-select: text;
+    }
+
+    /* Theme Toggle Button */
+    #theme-toggle {
+      background: none;
+      border: 2.5px solid var(--color-primary);
+      border-radius: 2rem;
+      cursor: pointer;
+      width: 56px;
+      height: 30px;
+      position: relative;
+      transition: border-color var(--transition-speed);
+      display: flex;
+      align-items: center;
+      padding: 2px;
+    }
+    #theme-toggle:hover,
+    #theme-toggle:focus {
+      border-color: var(--color-primary-hover);
+      outline: none;
+      box-shadow: 0 0 8px var(--color-primary);
+    }
+    #theme-toggle .toggle-thumb {
+      background: var(--color-primary);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      transition: transform var(--transition-speed), background-color var(--transition-speed);
+      transform: translateX(0);
+      position: relative;
+      z-index: 2;
+    }
+    #theme-toggle.dark .toggle-thumb {
+      transform: translateX(26px);
+      background: var(--color-secondary);
+    }
+
+    /* Icons */
+    .icon-light, .icon-dark {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      fill: var(--icon-sun-color-light);
+      stroke: var(--icon-sun-color-light);
+      transition: fill var(--transition-speed), stroke var(--transition-speed);
+      pointer-events: none;
+    }
+    .icon-light { left: 6px; }
+    .icon-dark { right: 6px; fill: var(--color-primary); }
+
+    /* Container */
+    main {
+      max-width: 1200px;
+      margin: 3rem auto 4rem;
+      padding: 0 1rem;
+      flex-grow: 1;
+      user-select: text;
+    }
+
+    /* Hero */
+    #hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      user-select: none;
+    }
+    #hero h2 {
+      font-size: 3.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 0 0 0.4rem;
+      line-height: 1.1;
+    }
+    #hero p {
+      color: var(--color-muted);
+      font-size: 1.25rem;
+      max-width: 760px;
+      margin: 0 auto;
+      user-select: text;
+    }
+    #hero button.cta {
+      margin-top: 1.5rem;
+      background-color: var(--color-btn-bg);
+      color: var(--color-btn-text);
+      font-weight: 600;
+      font-size: 1.25rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: var(--border-radius);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--shadow-btn);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+      user-select: none;
+    }
+    #hero button.cta:hover,
+    #hero button.cta:focus {
+      background-color: var(--color-btn-bg-hover);
+      box-shadow: 0 6px 20px var(--shadow-hover);
+      outline: none;
+    }
+
+    /* Tips Section */
+    #tips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.8rem;
+      margin-bottom: 4rem;
+    }
+    .tip-card {
+      background: var(--color-card-bg);
+      border-radius: var(--border-radius);
+      border: 1px solid transparent;
+      padding: 1.7rem 1.8rem;
+      box-shadow: 0 4px 8px var(--shadow-card);
+      transition:
+        box-shadow var(--transition-speed),
+        transform var(--transition-speed),
+        border-color var(--transition-speed);
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .tip-card:focus,
+    .tip-card:hover {
+      box-shadow: 0 12px 24px var(--shadow-btn);
+      transform: translateY(-6px);
+      border-color: var(--color-primary);
+      outline: none;
+    }
+    .tip-card h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.6rem;
+      user-select: text;
+    }
+    .tip-card p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      color: var(--color-text-dark);
+      user-select: text;
+      flex-grow: 1;
+    }
+
+    /* Photos Section */
+    #photos-section {
+      text-align: center;
+      user-select: none;
+    }
+    #photos-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1.2rem;
+      user-select: text;
+    }
+    #upload-label {
+      display: inline-block;
+      background-color: var(--color-btn-bg);
+      color: var(--color-btn-text);
+      padding: 0.9rem 1.9rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--shadow-btn);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+      user-select: none;
+    }
+    #upload-label:hover,
+    #upload-label:focus {
+      background-color: var(--color-btn-bg-hover);
+      box-shadow: 0 6px 20px var(--shadow-hover);
+      outline: none;
+    }
+    #photo-input {
+      display: none;
+    }
+    #gallery {
+      margin-top: 1.4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+    .photo-thumb {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px var(--shadow-card);
+      cursor: pointer;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      user-select: none;
+    }
+    .photo-thumb:focus,
+    .photo-thumb:hover {
+      transform: scale(1.06);
+      box-shadow: 0 12px 24px var(--shadow-btn);
+      outline: none;
+    }
+
+    /* Modal */
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1600;
+      padding: 1rem;
+    }
+    #modal.open {
+      display: flex;
+    }
+    #modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.85);
+      user-select: none;
+    }
+
+    #modal-close {
+      position: absolute;
+      top: 2.25rem;
+      right: 2.25rem;
+      background: var(--color-primary);
+      border: none;
+      color: #fff;
+      font-size: 2.25rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--shadow-btn);
+      transition: background-color var(--transition-speed);
+      user-select: none;
+    }
+    #modal-close:hover,
+    #modal-close:focus {
+      background: var(--color-primary-hover);
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      padding: 1.6rem 1rem;
+      border-top: 1px solid #e5e7eb;
+      user-select: none;
+      margin-top: auto;
+      background: var(--color-bg);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem 1.25rem;
+      }
+      main {
+        margin: 2rem 1rem 3rem;
+        padding: 0;
+      }
+      #hero h2 {
+        font-size: 2.4rem;
+      }
+      #tips {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .photo-thumb {
+        width: 130px;
+        height: 130px;
+      }
+      #theme-toggle {
+        width: 48px;
+        height: 26px;
+      }
+      #theme-toggle .toggle-thumb {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <h1 tabindex="0">Cultura Oceânica e Tecnologia - São Luís MA</h1>
+    <button id="theme-toggle" aria-label="Alternar tema claro e escuro" aria-pressed="false" title="Alternar tema claro e escuro">
+      <div class="toggle-thumb"></div>
+      <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="5" stroke="none" fill="var(--icon-sun-color-light)"/>
+        <g stroke="var(--icon-sun-color-light)" stroke-width="2">
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </g>
+      </svg>
+      <svg class="icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill="var(--color-primary)" d="M21.753 15.606a9 9 0 11-12.39-12.39 7 7 0 0012.39 12.39z"/>
+      </svg>
+    </button>
+  </header>
+
+  <main>
+    <section id="hero" aria-label="Introdução">
+      <h2 tabindex="0">Conectando Saberes para Preservar os Mares</h2>
+      <p tabindex="0">Uma proposta interativa com Tecnologias da Informação e Comunicação para conscientização e ações pró-preservação dos oceanos de São Luís - MA.</p>
+      <button class="cta" id="scrollToTips" aria-label="Ver dicas para preservar os oceanos">Explore as 10 Dicas</button>
+    </section>
+
+    <section id="tips" aria-label="Dicas para explorar, compreender e preservar os oceanos">
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip1-desc">
+        <h3>1. Explore e Observe</h3>
+        <p id="tip1-desc">Use apps e ferramentas digitais para identificar espécies marinhas locais e registrar suas observações.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip2-desc">
+        <h3>2. Entenda a Importância dos Ecossistemas</h3>
+        <p id="tip2-desc">Aprenda como recifes, manguezais e praias protegem a biodiversidade e mantêm o equilíbrio do oceano.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip3-desc">
+        <h3>3. Participe de Projetos Científicos Cidadãos</h3>
+        <p id="tip3-desc">Contribua enviando dados e fotos para iniciativas que monitoram a saúde dos mares.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip4-desc">
+        <h3>4. Preserve a Água e Reduza Resíduos</h3>
+        <p id="tip4-desc">Evite o uso excessivo de plástico e descarte corretamente os resíduos para evitar a poluição marinha.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip5-desc">
+        <h3>5. Compartilhe Conhecimento com a Comunidade</h3>
+        <p id="tip5-desc">Use plataformas digitais para divulgar boas práticas e tradições culturais relacionadas ao mar.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip6-desc">
+        <h3>6. Valorize a Cultura Local e o Conhecimento Tradicional</h3>
+        <p id="tip6-desc">Combine a tecnologia com o saber popular para ações de conservação mais eficazes e respeitosas.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip7-desc">
+        <h3>7. Utilize Tecnologias para Monitoramento Ambiental</h3>
+        <p id="tip7-desc">Apoie o uso de drones, sensores e ferramentas digitais para proteger e mapear os ambientes costeiros.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip8-desc">
+        <h3>8. Incentive a Educação Ambiental Digital</h3>
+        <p id="tip8-desc">Participe e promova cursos e oficinas online que ampliem a conscientização ambiental.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip9-desc">
+        <h3>9. Aproxime-se da Realidade Aumentada e Virtual</h3>
+        <p id="tip9-desc">Explore apps interativos que mostram a vida marinha e os impactos da poluição e aquecimento global.</p>
+      </article>
+      <article class="tip-card" tabindex="0" role="button" aria-pressed="false" aria-describedby="tip10-desc">
+        <h3>10. Engaje em Voluntariado e Ações Locais</h3>
+        <p id="tip10-desc">Participe de limpeza de praias, mutirões e campanhas digitais que somam forças para o oceano.</p>
+      </article>
+    </section>
+
+    <section id="photos-section" aria-label="Galeria de fotos dos alunos">
+      <h2 tabindex="0">Galeria de Fotos dos Alunos</h2>
+      <label for="photo-input" id="upload-label" tabindex="0">📷 Adicionar fotos da turma</label>
+      <input type="file" id="photo-input" accept="image/*" multiple aria-describedby="upload-label" />
+      <div id="gallery" aria-live="polite" aria-relevant="additions"></div>
+    </section>
+  </main>
+
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-close" tabindex="-1">
+    <button id="modal-close" aria-label="Fechar visualização da foto">&times;</button>
+    <img alt="Foto ampliada" />
+  </div>
+
+  <footer>
+    Feira de Ciências - Projeto Cultura Oceânica e Tecnologia &copy; 2024
+  </footer>
+
+  <script>
+    (function(){
+      const photoInput = document.getElementById('photo-input');
+      const gallery = document.getElementById('gallery');
+      const modal = document.getElementById('modal');
+      const modalImg = modal.querySelector('img');
+      const modalClose = document.getElementById('modal-close');
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      const tips = document.querySelectorAll('.tip-card');
+
+      const STORAGE_KEY = 'cultura-oceanica-photos';
+
+      function loadPhotosFromStorage() {
+        const photosJSON = localStorage.getItem(STORAGE_KEY);
+        if (photosJSON) {
+          try {
+            const photos = JSON.parse(photosJSON);
+            photos.forEach(dataURL => {
+              const img = document.createElement('img');
+              img.src = dataURL;
+              img.className = 'photo-thumb';
+              img.alt = 'Foto da turma';
+              img.tabIndex = 0;
+              img.setAttribute('role', 'button');
+              img.setAttribute('aria-label', 'Abrir foto da turma');
+              img.addEventListener('click', () => openModal(img.src, img.alt));
+              img.addEventListener('keydown', e => {
+                if(e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openModal(img.src, img.alt);
+                }
+              });
+              gallery.appendChild(img);
+            });
+          } catch (error) {
+            console.error('Erro ao carregar fotos do armazenamento local:', error);
+          }
+        }
+      }
+
+      function savePhotosToStorage() {
+        const imgs = gallery.querySelectorAll('img.photo-thumb');
+        const dataURLs = Array.from(imgs).map(img => img.src);
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(dataURLs));
+        } catch(error) {
+          console.error('Erro ao salvar fotos no armazenamento local:', error);
+        }
+      }
+
+      function createPhotoThumbnail(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'photo-thumb';
+            img.alt = file.name || 'Foto da turma';
+            img.tabIndex = 0;
+            img.setAttribute('role', 'button');
+            img.setAttribute('aria-label', 'Abrir foto ' + img.alt);
+            img.addEventListener('click', () => openModal(img.src, img.alt));
+            img.addEventListener('keydown', e => {
+              if(e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(img.src, img.alt);
+              }
+            });
+            resolve(img);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      photoInput.addEventListener('change', async e => {
+        const files = Array.from(e.target.files);
+        for (const file of files) {
+          if (!file.type.startsWith('image/')) continue;
+          try {
+            const thumb = await createPhotoThumbnail(file);
+            gallery.appendChild(thumb);
+          } catch {
+            console.warn('Falha ao ler arquivo:', file.name);
+          }
+        }
+        savePhotosToStorage();
+        photoInput.value = '';
+      });
+
+      function openModal(src, alt) {
+        modalImg.src = src;
+        modalImg.alt = alt;
+        modal.classList.add('open');
+        modal.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modalImg.src = '';
+        modalImg.alt = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+      });
+      modal.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          body.classList.add('dark');
+          themeToggle.classList.add('dark');
+          themeToggle.setAttribute('aria-pressed', 'true');
+          themeToggle.setAttribute('title', 'Alternar para tema claro');
+        } else {
+          body.classList.remove('dark');
+          themeToggle.classList.remove('dark');
+          themeToggle.setAttribute('aria-pressed', 'false');
+          themeToggle.setAttribute('title', 'Alternar para tema escuro');
+        }
+        localStorage.setItem('theme', theme);
+      }
+
+      themeToggle.addEventListener('click', () => {
+        setTheme(body.classList.contains('dark') ? 'light' : 'dark');
+      });
+
+      (function initTheme() {
+        const saved = localStorage.getItem('theme');
+        if(saved === 'dark') {
+          setTheme('dark');
+        } else if(saved === 'light'){
+          setTheme('light');
+        } else {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          setTheme(prefersDark ? 'dark' : 'light');
+        }
+      })();
+
+      tips.forEach(tip => {
+        tip.addEventListener('click', () => {
+          const pressed = tip.getAttribute('aria-pressed') === 'true';
+          tip.setAttribute('aria-pressed', String(!pressed));
+        });
+        tip.addEventListener('keydown', e => {
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            tip.click();
+          }
+        });
+      });
+
+      const scrollBtn = document.getElementById('scrollToTips');
+      scrollBtn.addEventListener('click', () => {
+        document.getElementById('tips').scrollIntoView({behavior: 'smooth'});
+        scrollBtn.blur();
+      });
+
+      window.addEventListener('load', loadPhotosFromStorage);
+    })();
+  </script>
+</body>
+</html>
